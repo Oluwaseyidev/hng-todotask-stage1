@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo Card</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <main class="page-wrapper">
+
+    <!--
+      CARD ROOT
+      - <article> is a semantic HTML element that means "self-contained content"
+      - data-testid is a special attribute automated tests use to find this element
+    -->
+    <article data-testid="test-todo-card" class="todo-card" aria-label="Todo task card">
+
+      <!-- ===== TOP ROW: Priority + Status ===== -->
+      <div class="card-top-row">
+
+        <!--
+          PRIORITY BADGE
+          - aria-label tells screen readers what this badge means
+          - We'll set the actual text and color via JS
+        -->
+        <span
+          data-testid="test-todo-priority"
+          class="badge badge-priority"
+          aria-label="Priority: High"
+          id="priority-badge"
+        >
+          🔴 High
+        </span>
+
+        <!--
+          STATUS INDICATOR
+          - Same idea as priority
+        -->
+        <span
+          data-testid="test-todo-status"
+          class="badge badge-status"
+          id="status-badge"
+        >
+          In Progress
+        </span>
+
+      </div>
+
+      <!-- ===== CHECKBOX + TITLE ROW ===== -->
+      <div class="title-row">
+
+        <!--
+          CHECKBOX TOGGLE
+          - <label> wraps the checkbox so clicking the label also checks the box
+          - for="complete-toggle" links the label to the input below
+        -->
+        <label for="complete-toggle" class="checkbox-label" aria-label="Mark task as complete">
+          <input
+            type="checkbox"
+            id="complete-toggle"
+            data-testid="test-todo-complete-toggle"
+            class="complete-checkbox"
+          />
+          <span class="custom-checkbox" aria-hidden="true"></span>
+        </label>
+
+        <!--
+          TASK TITLE
+          - <h2> means "heading level 2" — important for screen readers and SEO
+        -->
+        <h2 data-testid="test-todo-title" class="todo-title" id="todo-title">
+          Design the new landing page
+        </h2>
+
+      </div>
+
+      <!-- ===== DESCRIPTION ===== -->
+      <!--
+        <p> is a paragraph tag — used for blocks of text
+      -->
+      <p data-testid="test-todo-description" class="todo-description">
+        Create wireframes, pick color palette, write copy for hero section, and get stakeholder approval before dev handoff.
+      </p>
+
+      <!-- ===== DUE DATE + TIME REMAINING ===== -->
+      <div class="due-row">
+
+        <!--
+          <time> is a semantic HTML element specifically for dates/times
+          - datetime attribute gives machines the exact date in ISO format
+          - The text inside is what humans see (formatted nicely)
+        -->
+        <time
+          data-testid="test-todo-due-date"
+          class="due-date"
+          datetime="2026-04-16T18:00:00Z"
+          id="due-date-display"
+        >
+          📅 Due Apr 16, 2026
+        </time>
+
+        <!--
+          TIME REMAINING
+          - aria-live="polite" means: when this text changes, screen readers
+            will announce it without interrupting what they're saying
+        -->
+        <span
+          data-testid="test-todo-time-remaining"
+          class="time-remaining"
+          id="time-remaining"
+          aria-live="polite"
+        >
+          Calculating...
+        </span>
+
+      </div>
+
+      <!-- ===== TAGS ===== -->
+      <!--
+        <ul role="list"> = an unordered list
+        role="list" is for screen readers — it confirms this is a list of items
+        Each <li> is one tag/chip
+      -->
+      <ul
+        data-testid="test-todo-tags"
+        class="tags-list"
+        role="list"
+        aria-label="Task tags"
+      >
+        <li data-testid="test-todo-tag-work" class="tag">💼 Work</li>
+        <li data-testid="test-todo-tag-urgent" class="tag">🚨 Urgent</li>
+        <li class="tag">🎨 Design</li>
+      </ul>
+
+      <!-- ===== ACTION BUTTONS ===== -->
+      <div class="actions-row">
+
+        <!--
+          <button> is the correct element for clickable actions
+          aria-label gives screen readers a description when there's only an icon
+        -->
+        <button
+          data-testid="test-todo-edit-button"
+          class="btn btn-edit"
+          aria-label="Edit task"
+          onclick="handleEdit()"
+        >
+          ✏️ Edit
+        </button>
+
+        <button
+          data-testid="test-todo-delete-button"
+          class="btn btn-delete"
+          aria-label="Delete task"
+          onclick="handleDelete()"
+        >
+          🗑️ Delete
+        </button>
+
+      </div>
+
+    </article>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
